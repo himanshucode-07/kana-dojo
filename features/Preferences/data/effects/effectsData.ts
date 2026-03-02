@@ -61,5 +61,9 @@ export const EFFECTS: EffectDefinition[] = [
 
 // Aliases kept for backward compatibility with renderers and stores.
 export const CURSOR_TRAIL_EFFECTS = EFFECTS;
-export const CLICK_EFFECTS = EFFECTS;
+
+// Click effects shown in a different static order so the two grids don't look identical.
+const CLICK_ORDER = ["none","kabuki","fish","butterfly","fuji","wind","snowflake","firework","gyoza","narutomaki","lantern","maple","bento","lotus","chopsticks","ramen","castle","tokyotower","blossom","rice","senbei","sushi","sakura","torii","tea","kitsune","mooncake","sake","hanafuda","hina","carp","fan","moonrabbit","star","firecracker","fugu","tsukimi","moon","curry","dango","panda","deer","kadomatsu","festival","bamboo","redenvelope","sunrise","sparkle","dragon","wave","sunface"];
+const _effectById = new Map(EFFECTS.map(e => [e.id, e]));
+export const CLICK_EFFECTS = CLICK_ORDER.map(id => _effectById.get(id)!);
 

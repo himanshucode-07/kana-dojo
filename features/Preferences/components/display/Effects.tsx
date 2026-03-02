@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import usePreferencesStore from '@/features/Preferences/store/usePreferencesStore';
 import { buttonBorderStyles } from '@/shared/lib/styles';
 import { useHasFinePointer } from '@/shared/hooks/useHasFinePointer';
-import { EFFECTS } from '../../data/effects/effectsData';
+import { EFFECTS, CLICK_EFFECTS } from '../../data/effects/effectsData';
 import CollapsibleSection from '../shared/CollapsibleSection';
 import { MousePointer2, Zap } from 'lucide-react';
 
@@ -93,7 +93,7 @@ const Effects = () => {
         storageKey='prefs-effects-click'
       >
         <fieldset className='grid grid-cols-4 gap-3 p-1 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7'>
-          {EFFECTS.map(effect => (
+          {CLICK_EFFECTS.map(effect => (
             <EffectCard
               key={effect.id}
               name={effect.name}
