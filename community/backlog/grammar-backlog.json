@@ -68,25 +68,25 @@
   {
     "id": 12,
     "text": "\"〜つもり\" expresses intent, like \"I plan to\" do something.",
-    "completed": false,
+    "completed": true,
     "issued": false
   },
   {
     "id": 13,
     "text": "\"〜なければならない\" means \"must\" or \"have to\" do something.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
     "id": 14,
     "text": "\"〜なくてもいい\" means \"don't have to\" and lifts an obligation.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 15,
     "text": "\"〜てくれる\" indicates someone does a favor for the speaker.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -158,7 +158,7 @@
   {
     "id": 27,
     "text": "\"〜ばかり\" means \"just\" (in terms of time) or \"only\" depending on context.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -578,19 +578,19 @@
   {
     "id": 97,
     "text": "\"〜つもり\" expresses intent, like \"I plan to\" do something. (practice variation 12)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
     "id": 98,
     "text": "\"〜なければならない\" means \"must\" or \"have to\" do something. (practice variation 13)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
     "id": 99,
     "text": "\"〜なくてもいい\" means \"don't have to\" and lifts an obligation. (practice variation 14)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -644,19 +644,19 @@
   {
     "id": 108,
     "text": "\"〜のに\" expresses contrast or regret, similar to \"even though\". (practice variation 23)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
     "id": 109,
     "text": "\"〜ので\" gives a reason in a polite or softer way than \"から\". (practice variation 24)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
     "id": 110,
     "text": "\"〜たところ\" can mean \"just did\" something and observed a result. (practice variation 25)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -692,7 +692,7 @@
   {
     "id": 116,
     "text": "\"〜ところ\" refers to a point in time, like \"about to\", \"in the middle of\", or \"just finished\". (practice variation 31)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -704,7 +704,7 @@
   {
     "id": 118,
     "text": "\"〜ていく/〜てくる\" shows direction or change over time, like \"will start\" or \"have been\". (practice variation 33)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -741,18 +741,18 @@
     "id": 124,
     "text": "\"〜かもしれない\" means \"might be\" or \"maybe\". (practice variation 39)",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 125,
     "text": "\"〜うちに\" means \"while\" or \"before\" something changes. (practice variation 40)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
     "id": 126,
     "text": "\"〜ことができる\" expresses ability, like \"can do\". (practice variation 41)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -806,7 +806,7 @@
   {
     "id": 135,
     "text": "\"〜わけではない\" means \"not necessarily\" or \"it's not that\". (practice variation 50)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -836,7 +836,7 @@
   {
     "id": 140,
     "text": "\"〜ば〜ほど\" means \"the more... the more...\". (practice variation 55)",
-    "issued": false,
+    "issued": true,
     "completed": false
   }
 ]

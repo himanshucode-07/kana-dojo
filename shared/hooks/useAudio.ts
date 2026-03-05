@@ -1,7 +1,12 @@
 'use client';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Random } from 'random-js';
 import { useAudioPreferences } from '@/features/Preferences';
+import {
+  DEFAULT_CLICK_SOUND_ID,
+  getClickSoundVariantBaseUrls,
+} from '@/features/Preferences/data/audio/clickSounds';
+import type { ClickSoundId } from '@/features/Preferences/data/audio/clickSounds';
 
 const random = new Random();
 
@@ -11,7 +16,9 @@ const random = new Random();
 
 let audioContext: AudioContext | null = null;
 const bufferCache = new Map<string, AudioBuffer>();
-const MAX_CACHE_SIZE = 20;
+const inFlightLoads = new Map<string, Promise<AudioBuffer | null>>();
+const MAX_CACHE_SIZE = 300;
+const CLICK_SOUND_PRELOAD_LIMIT = 3;
 
 /**
  * Get or create the shared AudioContext
@@ -36,10 +43,13 @@ const loadAudioBuffer = async (url: string): Promise<AudioBuffer | null> => {
   // Check cache first
   const cached = bufferCache.get(url);
   if (cached) return cached;
+  const pending = inFlightLoads.get(url);
+  if (pending) return pending;
 
-  try {
+  const loadPromise = (async () => {
+    try {
     const ctx = getAudioContext();
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: 'force-cache' });
     if (!response.ok) throw new Error(`Failed to fetch ${url}`);
 
     const arrayBuffer = await response.arrayBuffer();
@@ -55,10 +65,16 @@ const loadAudioBuffer = async (url: string): Promise<AudioBuffer | null> => {
 
     bufferCache.set(url, audioBuffer);
     return audioBuffer;
-  } catch (error) {
-    console.warn(`Failed to load audio: ${url}`, error);
-    return null;
-  }
+    } catch (error) {
+      console.warn(`Failed to load audio: ${url}`, error);
+      return null;
+    } finally {
+      inFlightLoads.delete(url);
+    }
+  })();
+
+  inFlightLoads.set(url, loadPromise);
+  return loadPromise;
 };
 
 /**
@@ -157,13 +173,6 @@ const getAudioUrl = (basePath: string, hasOpus: boolean = true): string => {
 // Sound File URLs
 // =============================================================================
 
-const clickSoundUrls = [
-  '/sounds/click/click4/click4_11',
-  '/sounds/click/click4/click4_22',
-  '/sounds/click/click4/click4_33',
-  '/sounds/click/click4/click4_44',
-];
-
 const CORRECT_SOUND_BASE = '/sounds/correct';
 const ERROR_SOUND_BASE = '/sounds/error/error1/error1_1';
 const LONG_SOUND_BASE = '/sounds/long';
@@ -224,7 +233,18 @@ export const preloadGameSounds = async (): Promise<void> => {
   await Promise.all([
     getCorrectPool().ensureLoaded(),
     getErrorPool().ensureLoaded(),
+    preloadClickSoundPack(DEFAULT_CLICK_SOUND_ID),
   ]);
+};
+
+export const preloadClickSoundPack = async (
+  soundId: ClickSoundId,
+): Promise<void> => {
+  const variantBaseUrls = getClickSoundVariantBaseUrls(soundId);
+  const prioritized = variantBaseUrls.slice(0, CLICK_SOUND_PRELOAD_LIMIT);
+  await Promise.all(
+    prioritized.map(baseUrl => getClickPool(baseUrl).ensureLoaded()),
+  );
 };
 
 // =============================================================================
@@ -232,18 +252,30 @@ export const preloadGameSounds = async (): Promise<void> => {
 // =============================================================================
 
 export const useClick = () => {
-  const { silentMode } = useAudioPreferences();
+  const { silentMode, clickSoundId } = useAudioPreferences();
+
+  useEffect(() => {
+    void preloadClickSoundPack(clickSoundId);
+  }, [clickSoundId]);
+
+  const playClickById = useCallback(
+    (soundId: ClickSoundId) => {
+      if (silentMode) return;
+      const variantBaseUrls = getClickSoundVariantBaseUrls(soundId);
+      if (variantBaseUrls.length === 0) return;
+      const baseUrl =
+        variantBaseUrls[random.integer(0, variantBaseUrls.length - 1)];
+      const pool = getClickPool(baseUrl);
+      pool.play();
+    },
+    [silentMode],
+  );
 
   const playClick = useCallback(() => {
-    if (silentMode) return;
+    playClickById(clickSoundId);
+  }, [clickSoundId, playClickById]);
 
-    const baseUrl =
-      clickSoundUrls[random.integer(0, clickSoundUrls.length - 1)];
-    const pool = getClickPool(baseUrl);
-    pool.play();
-  }, [silentMode]);
-
-  return { playClick };
+  return { playClick, playClickById };
 };
 
 export const useCorrect = () => {

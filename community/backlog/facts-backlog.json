@@ -57,19 +57,19 @@
     "id": 10,
     "fact": "Raw horse meat, called 'basashi' (馬刺し), is a popular delicacy in Kumamoto prefecture, often served frozen or thinly sliced with soy sauce and ginger.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 11,
     "fact": "Japan's postal system has a special service where you can mail a letter to your future self, and they'll deliver it years later on the date you specify.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 12,
     "fact": "The word 'bakku-shan' (バックシャン) describes someone who looks attractive from behind but not from the front - a uniquely specific observation.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 13,
@@ -105,12 +105,12 @@
     "id": 18,
     "fact": "There are cat cafes in Japan where you pay by the hour to pet cats, but there are also owl cafes, hedgehog cafes, snake cafes, and even penguin bars.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 19,
     "fact": "Japanese convenience stores (konbini) are so advanced that over 70% of bills in Japan are paid there, not at banks.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1016,25 +1016,25 @@
   {
     "id": 170,
     "fact": "Japan has 'death cafes' where people gather to discuss mortality over tea and cake in a relaxed setting.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
     "id": 171,
     "fact": "There's a Japanese practice 'kashikomarimashita' (かしこまりました) - the ultra-polite way service staff say 'understood.'",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
     "id": 172,
     "fact": "Japan has a museum dedicated to salt, explaining its 5,000-year production history and cultural significance.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 173,
     "fact": "The concept 'kokoro' (心) means heart-mind-spirit combined - emotions and thoughts are not separate in Japanese philosophy.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1161,12 +1161,12 @@
     "id": 194,
     "fact": "Japan has a festival where runners dressed as demons chase and catch women to bless them with good marriage luck.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 195,
     "fact": "There's a Japanese practice 'chinmoku' (沈黙) - meaningful silence in conversation that's comfortable, not awkward.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1305,7 +1305,7 @@
     "id": 218,
     "fact": "The Japanese term 'gacha-gacha' is onomatopoeia for capsule toy machines: the crank sound (gacha) and capsule drop (gacha).",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 219,
@@ -1323,7 +1323,7 @@
     "id": 221,
     "fact": "Japan has 'shuumatsu okashi' trends where limited-edition sweets appear for a season and then disappear, making them collectible.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 222,
@@ -1341,12 +1341,12 @@
     "id": 224,
     "fact": "The Japanese word 'mijikai' (短い) means short, but 'mijikai hanashi' can refer to a concise story — valued in polite conversation.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 225,
     "fact": "Japan has a concept 'yakudoshi' (厄年) — unlucky ages — where people often visit shrines for purification blessings.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1394,7 +1394,7 @@
   {
     "id": 233,
     "fact": "Japan has a ceremony called 'kagamibiraki' (鏡開き) where mochi is broken with a wooden mallet to celebrate a fresh start.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1412,7 +1412,7 @@
   {
     "id": 236,
     "fact": "The concept of 'yoin' (余韻) refers to the lingering aftertaste or feeling, and is used for everything from tea to music performances.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1533,7 +1533,7 @@
     "id": 256,
     "fact": "The word 'asahi' (朝日) means morning sun, and many towns host sunrise walks called 'asahi sanpo'.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 257,
@@ -1551,18 +1551,18 @@
     "id": 259,
     "fact": "Japan has a summer custom of hanging 'furin' (風鈴) glass wind chimes to make homes feel cooler with their sound.",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": 260,
     "fact": "The Japanese word 'shitsurai' (設え) means arranging a space thoughtfully — from seasonal decor to the placement of tea utensils.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
     "id": 261,
     "fact": "Japan’s 'machi-nami hozon' movement preserves historic townscapes, protecting old streets so locals can still live and work there.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1580,7 +1580,7 @@
   {
     "id": 264,
     "fact": "The word 'kawaigaru' (可愛がる) means to dote on or cherish, often used for pets or younger relatives.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1640,7 +1640,7 @@
   {
     "id": 274,
     "fact": "The word 'yuigahama' appears in coastal place names, referencing a long, gently sloping beach.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1694,7 +1694,7 @@
   {
     "id": 283,
     "fact": "Japan’s 'wagashi' sweets are often designed to match the season, with colors and shapes inspired by flowers or snow.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1826,7 +1826,7 @@
   {
     "id": 305,
     "fact": "The term 'shibui' (渋い) refers to understated, elegant beauty—often used for subtle flavors or aesthetics.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
