@@ -7,6 +7,7 @@ import { Joystick, Palette, Wand2 } from 'lucide-react';
 
 const ACTIVE_SECTION_OFFSET = 156;
 const SCROLL_TIMEOUT_MS = 350;
+const SCROLL_CONTAINER_SELECTOR = '[data-scroll-restoration-id="container"]';
 
 type SectionId = 'behavior' | 'display' | 'effects';
 
@@ -39,15 +40,23 @@ const getSectionElements = () =>
     .map(section => document.getElementById(section.id))
     .filter((element): element is HTMLElement => Boolean(element));
 
+const getScrollContainer = () =>
+  document.querySelector(SCROLL_CONTAINER_SELECTOR) as HTMLElement | null;
+
 const PreferencesSectionNav = () => {
   const [activeSection, setActiveSection] = useState<SectionId>('behavior');
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
+    const scrollContainer = getScrollContainer();
+    if (!scrollContainer) return;
+
     const updateActiveSection = () => {
       const sectionElements = getSectionElements();
       if (sectionElements.length === 0) return;
+
+      const containerTop = scrollContainer.getBoundingClientRect().top;
 
       const nextActiveSection = sectionElements.reduce<SectionId>(
         (closestSectionId, sectionElement) => {
@@ -55,10 +64,12 @@ const PreferencesSectionNav = () => {
           if (!closestSection) return sectionElement.id as SectionId;
 
           const currentDistance = Math.abs(
-            sectionElement.getBoundingClientRect().top - ACTIVE_SECTION_OFFSET,
+            sectionElement.getBoundingClientRect().top -
+              (containerTop + ACTIVE_SECTION_OFFSET),
           );
           const closestDistance = Math.abs(
-            closestSection.getBoundingClientRect().top - ACTIVE_SECTION_OFFSET,
+            closestSection.getBoundingClientRect().top -
+              (containerTop + ACTIVE_SECTION_OFFSET),
           );
 
           return currentDistance < closestDistance
@@ -76,11 +87,13 @@ const PreferencesSectionNav = () => {
     };
 
     updateActiveSection();
-    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    scrollContainer.addEventListener('scroll', updateActiveSection, {
+      passive: true,
+    });
     window.addEventListener('resize', updateActiveSection);
 
     return () => {
-      window.removeEventListener('scroll', updateActiveSection);
+      scrollContainer.removeEventListener('scroll', updateActiveSection);
       window.removeEventListener('resize', updateActiveSection);
     };
   }, []);
@@ -92,10 +105,22 @@ const PreferencesSectionNav = () => {
     event.preventDefault();
 
     const section = document.getElementById(sectionId);
-    if (!section) return;
+    const scrollContainer = getScrollContainer();
+    if (!section || !scrollContainer) return;
 
     setActiveSection(sectionId);
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const containerRect = scrollContainer.getBoundingClientRect();
+    const sectionRect = section.getBoundingClientRect();
+    const targetTop =
+      scrollContainer.scrollTop +
+      (sectionRect.top - containerRect.top) -
+      ACTIVE_SECTION_OFFSET;
+
+    scrollContainer.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: 'smooth',
+    });
 
     window.setTimeout(() => {
       window.history.replaceState(null, '', `#${sectionId}`);
@@ -104,7 +129,7 @@ const PreferencesSectionNav = () => {
 
   return (
     <div className='sticky top-2 z-40'>
-      <div className='mx-auto w-full max-w-fit rounded-2xl border-1 border-(--border-color) bg-(--background-color)/88 p-1 shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl'>
+      <div className='mx-auto w-full max-w-fit rounded-2xl border-1 border-(--border-color) bg-(--background-color) p-1 shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl'>
         <div className='flex w-full gap-0 rounded-2xl bg-(--card-color) p-0'>
           {sections.map(section => {
             const isSelected = activeSection === section.id;
